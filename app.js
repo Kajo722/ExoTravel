@@ -30,7 +30,7 @@ app.use(flash());
 //Express session config
 
 app.use(require("express-session")({
-    secret: process.env.PASSPORT_KEY,
+    secret: "hakuuuna matataata ahahaha",
     resave: false,
     saveUninitialized: false
 }));
