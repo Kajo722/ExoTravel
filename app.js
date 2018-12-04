@@ -11,6 +11,7 @@ var express        = require("express"),
     methodOverride = require("method-override"),
     request        = require("request");
 
+require("dotenv").config();
 
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
@@ -19,7 +20,8 @@ var commentRoutes    = require("./routes/comments"),
 
 //App configuration
 app.use(methodOverride("_method"));
-mongoose.connect("mongodb://localhost/yelp_camp");
+//mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@ds055792.mlab.com:55792/webapp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -28,7 +30,7 @@ app.use(flash());
 //Express session config
 
 app.use(require("express-session")({
-    secret: "hakuuuna matataata ahahaha",
+    secret: process.env.PASSPORT_KEY,
     resave: false,
     saveUninitialized: false
 }));
