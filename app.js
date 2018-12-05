@@ -21,7 +21,7 @@ var commentRoutes    = require("./routes/comments"),
 //App configuration
 app.use(methodOverride("_method"));
 //mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb://karol2:michalak02@ds055792.mlab.com:55792/webapp");
+mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
