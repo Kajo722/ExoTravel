@@ -5,13 +5,12 @@ var express        = require("express"),
     passport       = require("passport"),
     flash          = require("connect-flash"),
     LocalStrategy  = require("passport-local"),
-    Campground     = require("./models/campground"),
-    Comment        = require("./models/comment"),
     User           = require("./models/user"),
-    methodOverride = require("method-override"),
-    request        = require("request");
+    methodOverride = require("method-override");
 
 require("dotenv").config();
+
+// routes requires
 
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
@@ -20,7 +19,7 @@ var commentRoutes    = require("./routes/comments"),
 
 //App configuration
 app.use(methodOverride("_method"));
-//mongoose.connect("mongodb://localhost/yelp_camp");
+//mongoose.connection
 mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -44,7 +43,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
  
 
-//This adds the variables to every single template in app
+// Setting up local variables
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;

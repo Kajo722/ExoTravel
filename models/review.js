@@ -34,7 +34,7 @@ var reviewSchema = new mongoose.Schema({
         ref: "Campground"
     }
 }, {
-    // if timestamps are set to true, mongoose assigns createdAt and updatedAt fields to your schema, the type assigned is Date.
+    // if timestamps are set to true, mongoose assigns createdAt and updatedAt fields to schema, the type assigned is Date.
     timestamps: true
 });
 

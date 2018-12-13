@@ -92,10 +92,6 @@ middleware.checkReviewExistence = function (req, res, next) {
     }
 };
 
-
-
-
-
 middleware.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
