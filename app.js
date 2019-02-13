@@ -12,6 +12,7 @@ var express        = require("express"),
 require("dotenv").config();
 
 // Require routes
+
 var commentRoutes    = require("./routes/comments"),
     postRoutes       = require("./routes/posts"),
     indexRoutes      = require("./routes/index"),
@@ -42,8 +43,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
  
-
-// Local variables configuration
+// Setting up local variables
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
