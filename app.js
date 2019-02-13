@@ -63,4 +63,4 @@ app.use("/posts/:id/reviews", reviewRoutes);
 
 //Server setup
 
-app.listen(3000, () => console.log("ExoTravel App just started!"));
+app.listen(process.env.PORT, process.env.IP, () => console.log("ExoTravel App just started!"));
