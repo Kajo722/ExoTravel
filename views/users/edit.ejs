@@ -1,0 +1,33 @@
+<% include ../partials/header%>
+<div class="row">
+    <h1 style="text-align: center">Sign Up</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/users/<%=user._id%>?_method=PUT" method="POST" autocomplete="off">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input class="form-control" type="text" name="user[firstName]" placeholder="first name" value="<%=user.firstName%>">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input class="form-control" type="text" name="user[lastName]" placeholder="last name" value="<%=user.lastName%>">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="user[description]"><%=user.description%></textarea>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="user[email]" placeholder="email" value="<%user.email%>">
+            </div>
+            <div class="form-group">
+                <label for="Avatar">Avatar</label>
+                <input class="form-control" type="text" name="user[avatar]" placeholder="avatar url">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Change information</button>
+            </div>
+        </form>
+        <a href="/users/<%user._id%>">Go Back</a>
+    </div>
+</div>
+<% include ../partials/footer %>

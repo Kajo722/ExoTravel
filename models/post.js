@@ -1,9 +1,8 @@
 // User model in database
 
-var mongoose = require("mongoose"),
-    Comment  = require("./comment");
+var mongoose = require("mongoose");
 
-var campgroundSchema = new mongoose.Schema({
+var postSchema = new mongoose.Schema({
     name: String,
     price: String,
     location: String,
@@ -36,4 +35,4 @@ var campgroundSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Campground", campgroundSchema);
+module.exports = mongoose.model("Post", postSchema);

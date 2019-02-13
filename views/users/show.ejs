@@ -2,21 +2,20 @@
 <div class="row">
     <div class="col-md-4">
         <h1><%=user.firstName%>  <%=user.lastName%></h1>
+        <% if (currentUser) { %>
+        Click <a href="/users/<%=user.id%>/edit">here</a> to update profile's information
+        <% } %>
         <div class="thumbnail">
             <img src="<%=user.avatar%>" alt="user profile image">
             <div class="caption"><a href="mailto:<%=user.mail%>"><%=user.mail%></a></div>
         </div>
-        Lorem ipsum to roboczy tekst używany do celów projektowych, zwykle do prezentacji kroju pisma, kompozycji, układu kolumn, wyglądu składu, typografii itd.
-
-Większość tekstów niesie ze sobą swoje znaczenie, które narzuca odbiorcy wpływ na ocenę wyglądu. Lorem ipsum nie przekazuje bezpośredniej treści, jest ambiwalentny, pozwalając tym samym skupić się odbiorcy wyłącznie na wyglądzie.
-
-Za pomocą tego generatora możesz stworzyć tekst z losowo rozłożonych wyrazów, który wygląda na gramatycznie poprawny, ale jego znaczenie jest zupełnie abstrakcyjne co pozwala na interpretację tekstu wyłącznie jako znaków graficznych, graficznej kompozycji złożonej z liter.
+        <%= user.description %>
     </div>
     <div class="col-md-8">
-        <h3><%=user.username%>'s campgrounds</h3>
+        <h3><%=user.username%>'s posts</h3>
         <ul>
-        <% campgrounds.forEach(function(campground) { %>
-        <li><a href="/campgrounds/<%=campground.id %>"><%= campground.name%></a></li>
+        <% posts.forEach(function(post) { %>
+        <li><a href="/posts/<%=post.id %>"><%= post.name%></a></li>
         <% }); %>
         </ul>
     </div>

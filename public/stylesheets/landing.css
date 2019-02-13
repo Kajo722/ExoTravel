@@ -1,4 +1,5 @@
 body {
+  font-family: 'Indie Flower', cursive;
     background-color: #000;
 }
 
@@ -9,6 +10,10 @@ body {
     padding-top: 40vh;
 }
 
+#button {
+  color: white;
+  font-size: 2vh;
+}
 #landing-header h1 {
     color: white;
 }
@@ -38,22 +43,22 @@ body {
   animation: imageAnimation 50s linear infinite; 
 }
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url("/images/image1.jpg") 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  background-image: url("/images/image2.jpg");
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  background-image: url("/images/image3.jpg");
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  background-image: url("/images/image4.jpg");
   animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  background-image: url("/images/image5.jpg");
   animation-delay: 40s; 
 }
 @keyframes imageAnimation { 
@@ -72,7 +77,6 @@ body {
     opacity: 0
   }
 }
-/* Older browser support - .no-cssanimations class added by modernizr */
 .no-cssanimations .slideshow li {
 	opacity: 1;
 }

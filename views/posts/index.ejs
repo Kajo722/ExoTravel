@@ -1,0 +1,44 @@
+<% include ../partials/header%>
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to ExoTravel!</h1>
+            <p>View exotic travel destinations from all over the world</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="/posts/new">Add New Destination</a>
+            </p>
+            <p>
+                <form action="/posts" method="GET" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Post search..." class="form-control">
+                        <input type="submit" value="Search" class="btn btn-default">
+                    </div>
+                </form>
+            </p>
+        </div>
+    </header>
+
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% posts.forEach(function(post){ %>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+                <img src="<%= post.image %>">
+                <div class="caption">
+                    <h4><%= post.name %></h4>
+                    <% if (post.rating === 0) { %>
+                    <em>No reviews yet.</em>
+                    <% } else { %>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star <% if (post.rating > 1.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (post.rating > 2.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (post.rating > 3.5) { %> checked <% } %>"></span>
+                    <span class="fa fa-star <% if (post.rating > 4.5) { %> checked <% } %>"></span>
+                    <% } %>
+                </div>
+                <p>
+                    <a href="/posts/<%= post._id %>" class="btn btn-primary">More Info</a>
+                </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+<% include ../partials/footer %>

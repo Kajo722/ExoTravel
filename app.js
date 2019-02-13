@@ -5,29 +5,28 @@ var express        = require("express"),
     passport       = require("passport"),
     flash          = require("connect-flash"),
     LocalStrategy  = require("passport-local"),
-    Campground     = require("./models/campground"),
-    Comment        = require("./models/comment"),
     User           = require("./models/user"),
-    methodOverride = require("method-override"),
-    request        = require("request");
+    methodOverride = require("method-override");
 
+// Require environmental variables
 require("dotenv").config();
 
+// Require routes
 var commentRoutes    = require("./routes/comments"),
-    campgroundRoutes = require("./routes/campgrounds"),
+    postRoutes       = require("./routes/posts"),
     indexRoutes      = require("./routes/index"),
-    reviewRoutes     = require("./routes/reviews")
+    reviewRoutes     = require("./routes/reviews");
 
-//App configuration
+// App configuration
 app.use(methodOverride("_method"));
-//mongoose.connect("mongodb://localhost/yelp_camp");
+// Database connection
 mongoose.connect(process.env.DATABASEURL);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 
-//Express session config
+//Express session configuration
 
 app.use(require("express-session")({
     secret: process.env.PASSPORT_KEY,
@@ -35,7 +34,7 @@ app.use(require("express-session")({
     saveUninitialized: false
 }));
 
-//Passport config
+//Passport configuration
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,7 +43,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
  
 
-//This adds the variables to every single template in app
+// Local variables configuration
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
@@ -54,15 +53,14 @@ app.use(function(req, res, next){
 });
 app.locals.moment = require('moment');
 
-//ROUTES
+// ROUTES
 
 app.use(indexRoutes);
-app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
+app.use("/posts", postRoutes);
+app.use("/posts/:id/comments", commentRoutes);
+app.use("/posts/:id/reviews", reviewRoutes);
+
 
 //Server setup
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Yelp Camp application server has started");
-});
+app.listen(3000, () => console.log("ExoTravel App just started!"));

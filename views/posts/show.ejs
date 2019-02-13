@@ -4,7 +4,7 @@
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
     <div class="row">
       <div class="col-md-3">
-        <p class="lead">YelpCamp</p>
+        <p class="lead">ExoTravel</p>
         <div class="list group>">
           <li class="list-group-item active">Info1</li>
           <li class="list-group-item">Info2</li>
@@ -14,17 +14,17 @@
       </div>
       <div class="col-md-9">
         <div class="thumbnail">
-          <img class="image-responsive" src="<%=campground.image%>">
+          <img class="image-responsive" src="<%=post.image%>">
           <div class="caption-full">
-            <h4 class="pull-right">$<%=campground.price%>/night</h4>
-            <h4><a><%=campground.name%></a></h4>
-            <p><%=campground.description %></p>
+            <h4 class="pull-right">$<%=post.price%></h4>
+            <h4><a><%=post.name%></a></h4>
+            <p><%=post.description %></p>
             <p>
-              <em>Submitted by <a href="/users/<%=campground.author.id%>"> <%=campground.author.username%></a>, <%=moment(campground.createdAt).fromNow()%></em>
+              <em>Submitted by <a href="/users/<%=post.author.id%>"> <%=post.author.username%></a>, <%=moment(post.createdAt).fromNow()%></em>
             </p>
-            <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){%>
-            <a href="/campgrounds/<%=campground._id%>/edit" class="btn btn-warning">Edit</a>
-            <form class="delete-form" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+            <% if(currentUser && post.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){%>
+            <a href="/posts/<%=post._id%>/edit" class="btn btn-warning">Edit</a>
+            <form class="delete-form" action="/posts/<%=post._id%>?_method=DELETE" method="POST">
               <button class="btn btn-danger">Delete</button>
             </form>
             <% } %>
@@ -34,25 +34,25 @@
               <!--Review section-->
     <div class="thumbnail">
       <div class="caption-full">
-        <% if (campground.rating === 0) { %>
+        <% if (post.rating === 0) { %>
         <h5>
             <em>No reviews yet.</em>
         </h5>
         <% } else { %>
         <p>
           <span class="fa fa-star checked"></span>
-          <span class="fa fa-star <% if (campground.rating > 1.5) { %> checked <% } %>"></span>
-          <span class="fa fa-star <% if (campground.rating > 2.5) { %> checked <% } %>"></span>
-          <span class="fa fa-star <% if (campground.rating > 3.5) { %> checked <% } %>"></span>
-          <span class="fa fa-star <% if (campground.rating > 4.5) { %> checked <% } %>"></span>
-          <em>(total reviews: <%= campground.reviews.length %>)</em>
+          <span class="fa fa-star <% if (post.rating > 1.5) { %> checked <% } %>"></span>
+          <span class="fa fa-star <% if (post.rating > 2.5) { %> checked <% } %>"></span>
+          <span class="fa fa-star <% if (post.rating > 3.5) { %> checked <% } %>"></span>
+          <span class="fa fa-star <% if (post.rating > 4.5) { %> checked <% } %>"></span>
+          <em>(total reviews: <%= post.reviews.length %>)</em>
         </p>
         <p>
-          Current campground rating: <strong><%= campground.rating.toFixed(2) %></strong>
+          Current post rating: <strong><%= post.rating.toFixed(2) %></strong>
         </p>
-        <p><h4>Latest reviews for this campground:</h4></p>
+        <p><h4>Latest reviews for this post:</h4></p>
         <hr style="margin-top: 0;">
-        <% campground.reviews.slice(0, 5).forEach(function(review){ %>
+        <% post.reviews.slice(0, 5).forEach(function(review){ %>
         <div class="row">
           <div class="col-md-3">
             <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="fa fa-star"></span>'.repeat(5 - review.rating) %>
@@ -63,10 +63,10 @@
             <p style="text-align: justify; word-wrap: break-word;">
               <%= review.text %>
             </p>
-            <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
+            <% if(currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
             <a class="btn btn-xs btn-warning"
-              href="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>/edit">Edit</a>
-            <form id="delete-form" action="/campgrounds/<%=campground._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+              href="/posts/<%=post._id %>/reviews/<%=review._id %>/edit">Edit</a>
+            <form id="delete-form" action="/posts/<%=post._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
               <input type="submit" class="btn btn-xs btn-danger" value="Delete">
             </form>
             <% } %>
@@ -75,11 +75,11 @@
         <hr>
         <% }); %>
         <div style="margin-bottom: 10px;">
-          <h4><a href="/campgrounds/<%= campground._id %>/reviews"><i class="fa fa-search" aria-hidden="true"></i> See all reviews</a></h4>
+          <h4><a href="/posts/<%= post._id %>/reviews"><i class="fa fa-search" aria-hidden="true"></i> See all reviews</a></h4>
         </div>
         <% } %>
         <div>
-            <a class="btn btn-primary btn-lg <% if (currentUser && campground.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/campgrounds/<%= campground._id %>/reviews/new">
+            <a class="btn btn-primary btn-lg <% if (currentUser && post.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/posts/<%= post._id %>/reviews/new">
                 Write a New Review</a>
         </div>
       </div>
@@ -107,7 +107,7 @@
             <% if(currentUser) { %>
           <!--If the user is logged in, show the new comment form-->
           <h4>Write your comment <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></h4>
-          <form id="add-comment-form" action="/campgrounds/<%= campground._id %>/comments" method="POST">
+          <form id="add-comment-form" action="/posts/<%= post._id %>/comments" method="POST">
             <div class="form-group">
               <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
             </div>
@@ -126,12 +126,12 @@
       <hr>
 
       <!--Check if there are comments, if there are none say no comments.-->
-        <% if (campground.comments.length === 0) { %>
+        <% if (post.comments.length === 0) { %>
       <em style="color: grey;">No comments yet.</em>
         <% } %>
 
       <!--Display comments by looping through them-->
-        <% campground.comments.forEach(function(comment) { %>
+        <% post.comments.forEach(function(comment) { %>
       <div class="row">
         <div class="col-md-12">
           <strong>
@@ -155,14 +155,14 @@
           <a class="btn btn-xs btn-warning" role="button" data-toggle="collapse" href="#collapseEdit<%= comment._id %>" aria-expanded="false" aria-controls="collapse<%= comment._id %>">
             Edit</a>
           <!--Delete comment button-->
-          <form id="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline;">
+          <form id="delete-form" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline;">
             <button class="btn btn-xs btn-danger">Delete</button>
           </form>
           <!--Edit comment form-->
           <div class="collapse" id="collapseEdit<%= comment._id %>">
             <div class="well" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
               <h4>Edit your comment <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h4>
-              <form id="edit-comment-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+              <form id="edit-comment-form" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                   <input class="form-control" type="text" disabled value="<%= currentUser.username %>">
                 </div>
@@ -183,28 +183,7 @@
     </div>
     <!--COMMENT SECTION END-->
 <script>
-var campground = <%-JSON.stringify(campground)%>;
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2FqbzcyIiwiYSI6ImNqb2g0ZG5iMTBrOGkza211N2lsdWMzMnMifQ.EhYPwo83KVpsXbrdT2WVPA';
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/light-v9',
-  center: campground.coordinates,
-  zoom: 4
-});
-
-  // create a HTML element for our location
-  var el = document.createElement('div');
-  el.className = 'marker';
-
-  // make a marker for location and add to map
-  new mapboxgl.Marker(el)
-  .setLngLat(campground.coordinates)
-  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-  .setHTML('<h3>' + campground.name + '</h3><p>' + campground.location + '</p>'))
-  .addTo(map);
-
-
-document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
+var post = <%-JSON.stringify(post) %>
 </script>
+<script src="/javascripts/post.js"></script>
 <% include ../partials/footer %>

@@ -1,28 +1,28 @@
 <% include ../partials/header %>
     <div class="row">
-    <h1 style="text-align: center;">Create a New Campground</h1>
+    <h1 style="text-align: center;">Create a New Destination</h1>
         <div style="width: 30%; margin: 25px auto;">
-            <form action="/campgrounds" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form action="/posts" method="POST" enctype="multipart/form-data" autocomplete="off">
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="name" name="campground[name]">
+                <input class="form-control" type="text" placeholder="name" name="post[name]">
             </div>
             <div class="form-group">
-                <input class="form-control" type="number" placeholder="price" name="campground[price]" min="1" step="1">
+                <input class="form-control" type="number" placeholder="cost" name="post[price]" min="1" step="1">
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="location" name="campground[location]">
+                <input class="form-control" type="text" placeholder="location" name="post[location]">
             </div>
             <div class="form-group">
                 <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="description" name="campground[description]">
+                <input class="form-control" type="text" placeholder="description" name="post[description]">
             </div>
             <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block">Submit!</button>
             </div>
         </form>
-        <a href="/campgrounds">Back</a>
+        <a href="/posts">Back</a>
         </div>
     </div>
 
