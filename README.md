@@ -1,4 +1,4 @@
-# This is a demo application for employment purposes. 
+# This is a portfolio project of a website ExoTravel build using with Node and Express. 
 This is mainly a backend application with minimal frontend implementation. App is hosted on heroku: 
 
 Main features:
@@ -11,3 +11,5 @@ Main features:
 - Comments and Review system (star rankings);
 - Localization via Mapbox;
 - Image upload with multer and cloudinary;
+
+### Visit website here: https://shielded-tundra-90326.herokuapp.com/
