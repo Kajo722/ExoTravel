@@ -1,5 +1,5 @@
 # This is a portfolio project of a website ExoTravel build using with Node and Express. 
-This is mainly a backend application with minimal frontend implementation. App is hosted on heroku: 
+This is mainly a backend application with minimal frontend implementation. App is hosted on heroku.
 
 Main features of project:
 - Node with Express as backend server;
